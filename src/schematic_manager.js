@@ -165,7 +165,7 @@ const S = {
         chunk[32770] = (uint32 >>> 1) ^ -(uint32 & 1);
         position++;
 
-        // max: 3 bytes varint: chunkBytesCount <= (1+2)*32^3 = 98304 (-> [-1048576, 1048575])
+        // max: 3 bytes varint: chunkBytesCount <= (1+2)*(32^3) = 98304 (-> [-1048576, 1048575])
         uint32 = 0;
         shift = 0;
         do {
@@ -217,7 +217,7 @@ const S = {
               position++;
             }
 
-            // Int32Array
+            // Int16Array
             chunk.fill(blockId, state.caret, state.caret + amount);
 
             state.cursor = position;
@@ -844,7 +844,7 @@ const S = {
         hex += HEX_CHAR[varintByte >>> 4];
         hex += HEX_CHAR[varintByte & 0xF];
 
-        // 2 bytes (tail fixed)
+        // 2 bytes (fixed tail)
         S.output.hex += hex + "0000";
 
         state.phase = 0;
